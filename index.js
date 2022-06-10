@@ -71,5 +71,5 @@ async function fetchData(){
         fontSize: 34,
         horzAlign: 'center',
         vertAlign: 'center',
-    },    
-  }
+    });    
+  
