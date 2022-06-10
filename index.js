@@ -72,7 +72,4 @@ async function fetchData(){
         horzAlign: 'center',
         vertAlign: 'center',
     },    
-  })
-  
-  
-fetchData();
+  }
