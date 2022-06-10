@@ -5,10 +5,10 @@ const QUERY = `
   ethereum(network: ethereum) {
     dexTrades(
       options: {limit: 100, asc: "timeInterval.minute"}
-      date: {since: "2021-05-23"}
+      date: {since: "2022-01-23"}
       exchangeName: {is: "Uniswap"}
       baseCurrency: {is: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"}
-      quoteCurrency: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
+      quoteCurrency: {is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"}
     ) {
       timeInterval {
         minute(count: 5)
