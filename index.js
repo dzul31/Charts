@@ -67,7 +67,7 @@ async function fetchData(){
     watermark: {
         color: '#F4D03F',
         visible: true,
-        text: 'Chart Example by Joe',
+        text: 'Charts Example by Joe',
         fontSize: 34,
         horzAlign: 'center',
         vertAlign: 'center',
