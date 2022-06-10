@@ -7,7 +7,7 @@ const QUERY = `
       options: {limit: 100, asc: "timeInterval.minute"}
       date: {since: "2022-05-01"}
       exchangeName: {is: "Uniswap"}
-      baseCurrency: {is: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"}
+      baseCurrency: {is: "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE"}
       quoteCurrency: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
     ) {
       timeInterval {
