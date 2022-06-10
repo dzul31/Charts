@@ -2,35 +2,56 @@
 // ---------------- The GraphQL Query ----------------------
 const QUERY = ` 
 {
-  ethereum(network: ethereum) {
-    dexTrades(
-      options: {limit: 100, asc: "timeInterval.minute"}
-      date: {since: "2021-05-23"}
-      exchangeName: {is: "Uniswap"}
-      baseCurrency: {is: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"}
-      quoteCurrency: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}
-    ) {
-      timeInterval {
-        minute(count: 5)
+    $baseAddress: String
+    $quoteAddress: String
+    $from: ISO8601DateTime!
+    $to: ISO8601DateTime!
+    $interval: Int
+    $protocol: String
+    $exchangeName: String
+  ) {
+    ethereum(network: ethereum) {
+      dexTrades(
+        protocol: { is: $protocol }
+        baseCurrency: { is: $baseAddress }
+        quoteCurrency: { is: $quoteAddress }
+        date: { between: [$from, $to] }
+        exchangeName: { is: $exchangeName }
+        priceAsymmetry: { lt: 0.7 }
+        any: [
+          {tradeAmountUsd: { gt: 0.00001 }},
+          {tradeAmountUsd: { is: 0 }}
+        ]
+      ) {
+        timeInterval {
+          minute(format:"%FT%TZ", count: $interval)
+        }
+        buyCurrency: baseCurrency {
+          symbol
+          address
+        }
+        buyAmount: baseAmount
+        sellCurrency: quoteCurrency {
+          symbol
+          address
+        }
+        volume: quoteAmount
+        trades: count
+        high: quotePrice(calculate: maximum)
+        low: quotePrice(calculate: minimum)
+        open: minimum(of: block, get: quote_price)
+        close: maximum(of: block, get: quote_price)
       }
-      baseCurrency {
-        symbol
-        address
-      }
-      baseAmount
-      quoteCurrency {
-        symbol
-        address
-      }
-      quoteAmount
-      trades: count
-      quotePrice
-      maximum_price: quotePrice(calculate: maximum)
-      minimum_price: quotePrice(calculate: minimum)
-      open_price: minimum(of: block, get: quote_price)
-      close_price: maximum(of: block, get: quote_price)
     }
-  }
+  },
+'{
+  "from": "2021-10-03T00:15:33+03:00",
+  "to": "2021-11-16T00:00:00+02:00",
+  "interval": 30,
+  "baseAddress": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "quoteAddress": "0x389999216860AB8E0175387A0c90E5c52522C945",
+  "protocol": "Uniswap v2",
+  "exchangeName": "Uniswap"
 }
 
 `;
