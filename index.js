@@ -76,11 +76,11 @@ async function fetchData(){
   
   // set data
   lineSeries.setData([
-      { time: '2022-06-01', value: data.data.ethereum.dexTrades[0].maximum_price*Math.pow(10,12) },
-      { time: '2022-06-02', value: data.data.ethereum.dexTrades[1].maximum_price*Math.pow(10,12) },
-      { time: '2022-06-03', value: data.data.ethereum.dexTrades[2].maximum_price*Math.pow(10,12) },
-      { time: '2022-06-04', value: data.data.ethereum.dexTrades[3].maximum_price*Math.pow(10,12) },
-      { time: '2022-06-05', value: data.data.ethereum.dexTrades[4].maximum_price*Math.pow(10,12) },
+      { time: '2022-01-01', value: data.data.ethereum.dexTrades[0].maximum_price*Math.pow(10,12) },
+      { time: '2022-02-01', value: data.data.ethereum.dexTrades[1].maximum_price*Math.pow(10,12) },
+      { time: '2022-03-01', value: data.data.ethereum.dexTrades[2].maximum_price*Math.pow(10,12) },
+      { time: '2022-04-01', value: data.data.ethereum.dexTrades[3].maximum_price*Math.pow(10,12) },
+      { time: '2022-05-01', value: data.data.ethereum.dexTrades[4].maximum_price*Math.pow(10,12) },
       { time: '2022-06-06', value: data.data.ethereum.dexTrades[5].maximum_price*Math.pow(10,12) },
       { time: '2022-06-07', value: data.data.ethereum.dexTrades[6].maximum_price*Math.pow(10,12) },
       { time: '2022-06-08', value: data.data.ethereum.dexTrades[7].maximum_price*Math.pow(10,12) },
