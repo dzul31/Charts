@@ -8,7 +8,7 @@ const QUERY = `
       date: {since: "2021-05-23"}
       exchangeName: {is: "Uniswap"}
       baseCurrency: {is: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"}
-      quoteCurrency: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
+      quoteCurrency: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}
     ) {
       timeInterval {
         minute(count: 5)
