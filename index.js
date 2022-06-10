@@ -1,32 +1,39 @@
 
 // ---------------- The GraphQL Query ----------------------
+const QUERY = ` 
 {
-  ethereum(network: bsc) {
+  ethereum(network: ethereum) {
     dexTrades(
-      baseCurrency: {is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"}
-      quoteCurrency: {is: "0x55d398326f99059ff775485246999027b3197955"}
-      options: {desc: ["block.height", "transaction.index"], limit: 1}
+      options: {limit: 100, asc: "timeInterval.minute"}
+      date: {since: "2021-05-23"}
+      exchangeName: {is: "Uniswap"}
+      baseCurrency: {is: "0x910985ffa7101bf5801dd2e91555c465efd9aab3"}
+      quoteCurrency: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}
     ) {
-      block {
-        height
-        timestamp {
-          time(format: "%Y-%m-%d %H:%M:%S")
-        }
-      }
-      transaction {
-        index
+      timeInterval {
+        minute(count: 5)
       }
       baseCurrency {
         symbol
+        address
       }
+      baseAmount
       quoteCurrency {
         symbol
+        address
       }
+      quoteAmount
+      trades: count
       quotePrice
+      maximum_price: quotePrice(calculate: maximum)
+      minimum_price: quotePrice(calculate: minimum)
+      open_price: minimum(of: block, get: quote_price)
+      close_price: maximum(of: block, get: quote_price)
     }
   }
 }
 
+`;
 
 // -------- Endpoint ----------------------
 const endpoint = "https://graphql.bitquery.io/";
@@ -60,9 +67,28 @@ async function fetchData(){
     watermark: {
         color: '#F4D03F',
         visible: true,
-        text: 'Chart Example By Joe',
+        text: 'Chart Example by Joe',
         fontSize: 34,
         horzAlign: 'center',
         vertAlign: 'center',
-    });    
+    },    
+  })
   
+  // set data
+  lineSeries.setData([
+      { time: '2022-06-01', value: data.data.ethereum.dexTrades[0].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-02', value: data.data.ethereum.dexTrades[1].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-03', value: data.data.ethereum.dexTrades[2].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-04', value: data.data.ethereum.dexTrades[3].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-05', value: data.data.ethereum.dexTrades[4].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-06', value: data.data.ethereum.dexTrades[5].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-07', value: data.data.ethereum.dexTrades[6].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-08', value: data.data.ethereum.dexTrades[7].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-09', value: data.data.ethereum.dexTrades[8].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-10', value: data.data.ethereum.dexTrades[9].maximum_price*Math.pow(10,12) },
+      { time: '2022-06-11', value: data.data.ethereum.dexTrades[10].maximum_price*Math.pow(10,12) },
+      
+  ]);
+}
+
+fetchData();
