@@ -54,7 +54,7 @@ async function fetchData(){
   const data = await response.json(); 
 
   // ------------------------------------------- Lightweight chart ------------------------------------------------------
-  const chart = LightweightCharts.createChart(document.body, { width: 600, height: 400 });
+  const chart = LightweightCharts.createChart(document.body, { width: 400, height: 400 });
   
   const lineSeries = chart.addLineSeries();
   
@@ -67,8 +67,8 @@ async function fetchData(){
     watermark: {
         color: '#F4D03F',
         visible: true,
-        text: 'Chart Example by Joe',
-        fontSize: 24,
+        text: 'Charts Example by Joe',
+        fontSize: 44,
         horzAlign: 'center',
         vertAlign: 'center',
     },    
